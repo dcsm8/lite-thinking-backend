@@ -2,57 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('categories')->get();
 
-        return response()->json($products);
+        return Inertia::render('Products/Index', [
+            'products' => $products,
+        ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Products/Create');
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric',
         ]);
 
         $product = Product::create($validatedData);
 
-        return response()->json(['message' => 'Product created successfully.', 'product' => $product]);
+        $product->categories()->attach($request->input('categories'));
+
+        return redirect()->route('products.index');
     }
 
-    public function show($id)
+    public function edit(Product $product)
     {
-        $product = Product::findOrFail($id);
+        $product->load('categories');
 
-        return response()->json($product);
+        return Inertia::render('Products/Edit', [
+            'product' => $product,
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric',
         ]);
 
-        Product::whereId($id)->update($validatedData);
+        $product->update($validatedData);
 
-        $product = Product::findOrFail($id);
+        $product->categories()->sync($request->input('categories'));
 
-        return response()->json(['message' => 'Product updated successfully.', 'product' => $product]);
+        return redirect()->route('products.index');
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        Product::whereId($id)->delete();
+        $product->delete();
 
-        return response()->json(['message' => 'Product deleted successfully.']);
+        return redirect()->route('products.index');
     }
 }
