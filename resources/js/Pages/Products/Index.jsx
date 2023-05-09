@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 import {
     Table,
     Thead,
@@ -11,9 +12,24 @@ import {
     Container,
     Heading,
     Box,
+    Stack,
+    useDisclosure,
 } from "@chakra-ui/react";
+import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 
 const Index = ({ products }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const handleDelete = () => {
+        Inertia.delete(`/products/${selectedProduct.id}`);
+    };
+
+    const handleClickDelete = (product) => {
+        setSelectedProduct(product);
+        onOpen();
+    };
+
     return (
         <Container maxW="container.lg">
             <Box py={8}>
@@ -38,18 +54,37 @@ const Index = ({ products }) => {
                                 <Td>{product.description}</Td>
                                 <Td>{product.price}</Td>
                                 <Td>
-                                    <InertiaLink
-                                        href={`/products/${product.id}/edit`}
-                                    >
-                                        <Button colorScheme="blue" size="sm">
-                                            Edit
+                                    <Stack direction="row" spacing={4}>
+                                        <InertiaLink
+                                            href={`/products/${product.id}/edit`}
+                                        >
+                                            <Button
+                                                colorScheme="blue"
+                                                size="sm"
+                                            >
+                                                Edit
+                                            </Button>
+                                        </InertiaLink>
+                                        <Button
+                                            size="sm"
+                                            colorScheme="red"
+                                            onClick={() =>
+                                                handleClickDelete(product)
+                                            }
+                                        >
+                                            Delete
                                         </Button>
-                                    </InertiaLink>
+                                    </Stack>
                                 </Td>
                             </Tr>
                         ))}
                     </Tbody>
                 </Table>
+                <DeleteConfirmationModal
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    onDelete={handleDelete}
+                />
                 <Box mt={8}>
                     <InertiaLink href="/products/create">
                         <Button colorScheme="green" size="sm">
