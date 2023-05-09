@@ -14,6 +14,7 @@ import {
     Box,
     Stack,
     useDisclosure,
+    Flex,
 } from "@chakra-ui/react";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 
@@ -33,9 +34,16 @@ const Index = ({ products }) => {
     return (
         <Container maxW="container.lg">
             <Box py={8}>
-                <Heading as="h1" size="xl" mb={8}>
-                    Products
-                </Heading>
+                <Flex justifyContent="space-between" alignItems="center" m={8}>
+                    <Heading as="h1" size="xl">
+                        Products
+                    </Heading>
+                    <InertiaLink href="/products/create">
+                        <Button colorScheme="green" size="sm">
+                            Create product
+                        </Button>
+                    </InertiaLink>
+                </Flex>
                 <Table variant="simple">
                     <Thead>
                         <Tr>
@@ -85,13 +93,6 @@ const Index = ({ products }) => {
                     onClose={onClose}
                     onDelete={handleDelete}
                 />
-                <Box mt={8}>
-                    <InertiaLink href="/products/create">
-                        <Button colorScheme="green" size="sm">
-                            Create new product
-                        </Button>
-                    </InertiaLink>
-                </Box>
             </Box>
         </Container>
     );
