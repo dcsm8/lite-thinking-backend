@@ -14,7 +14,10 @@ import {
     NumberDecrementStepper,
     Container,
     Box,
+    Heading,
+    Flex,
 } from "@chakra-ui/react";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 const Create = () => {
     const { register, handleSubmit, formState } = useForm();
@@ -25,10 +28,12 @@ const Create = () => {
 
     return (
         <Container maxW="container.lg">
-            <Box py={8}>
-                <h1>Create Product</h1>
+            <Box maxW="xl" mx="auto" mt={10} p={5}>
+                <Heading as="h1" size="xl" mb={5}>
+                    Create Product
+                </Heading>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <FormControl id="name">
+                    <FormControl id="name" mb={5}>
                         <FormLabel>Name</FormLabel>
                         <Input
                             {...register("name", { required: true })}
@@ -36,14 +41,14 @@ const Create = () => {
                             placeholder="Enter product name"
                         />
                     </FormControl>
-                    <FormControl id="description">
+                    <FormControl id="description" mb={5}>
                         <FormLabel>Description</FormLabel>
                         <Textarea
                             {...register("description", { required: true })}
                             placeholder="Enter product description"
                         />
                     </FormControl>
-                    <FormControl id="price">
+                    <FormControl id="price" mb={5}>
                         <FormLabel>Price</FormLabel>
                         <NumberInput>
                             <NumberInputField
@@ -51,7 +56,6 @@ const Create = () => {
                                     required: true,
                                     min: 0,
                                 })}
-                                type="number"
                                 placeholder="Enter product price"
                             />
                             <NumberInputStepper>
@@ -60,14 +64,20 @@ const Create = () => {
                             </NumberInputStepper>
                         </NumberInput>
                     </FormControl>
-                    <Button
-                        mt={4}
-                        colorScheme="teal"
-                        isLoading={formState.isSubmitting}
-                        type="submit"
-                    >
-                        Create
-                    </Button>
+                    <Flex justifyContent="flex-end">
+                        <InertiaLink href="/products">
+                            <Button colorScheme="red" mr={3}>
+                                Cancel
+                            </Button>
+                        </InertiaLink>
+                        <Button
+                            colorScheme="teal"
+                            isLoading={formState.isSubmitting}
+                            type="submit"
+                        >
+                            Create
+                        </Button>
+                    </Flex>
                 </form>
             </Box>
         </Container>
