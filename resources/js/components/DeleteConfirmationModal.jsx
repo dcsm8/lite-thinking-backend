@@ -40,11 +40,11 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onDelete }) => {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button colorScheme="red" mr={3} onClick={handleSubmit}>
-                        Delete
-                    </Button>
-                    <Button variant="ghost" onClick={onClose}>
+                    <Button variant="ghost" mr={3} onClick={onClose}>
                         Cancel
+                    </Button>
+                    <Button colorScheme="red" onClick={handleSubmit}>
+                        Delete
                     </Button>
                 </ModalFooter>
             </ModalContent>
