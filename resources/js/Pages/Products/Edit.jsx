@@ -8,8 +8,9 @@ import {
     FormLabel,
     Heading,
     Input,
-    InputGroup,
-    InputLeftAddon,
+    NumberInputStepper,
+    NumberIncrementStepper,
+    NumberDecrementStepper,
     NumberInput,
     NumberInputField,
     Flex,
@@ -53,28 +54,24 @@ const Edit = ({ product }) => {
                             {...register("description")}
                         />
                     </FormControl>
-                    <FormControl mb={5}>
-                        <FormLabel htmlFor="price">Price</FormLabel>
-                        <InputGroup>
-                            <InputLeftAddon children="$" />
-                            <NumberInput
-                                id="price"
-                                min={0}
-                                defaultValue={product.price}
-                                onChange={(value) => setValue("price", value)}
-                            >
-                                <NumberInputField
-                                    placeholder="Enter product price"
-                                    {...register("price", {
-                                        required: true,
-                                        min: 0,
-                                    })}
-                                />
-                            </NumberInput>
-                        </InputGroup>
+                    <FormControl id="price" mb={5}>
+                        <FormLabel>Price</FormLabel>
+                        <NumberInput>
+                            <NumberInputField
+                                {...register("price", {
+                                    required: true,
+                                    min: 0,
+                                })}
+                                placeholder="Enter product price"
+                            />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
                     </FormControl>
                     <Flex justifyContent="flex-end">
-                        <InertiaLink href="/products" as="button">
+                        <InertiaLink href="/products">
                             <Button colorScheme="red" mr={3}>
                                 Cancel
                             </Button>
