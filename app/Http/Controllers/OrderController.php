@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -19,7 +22,10 @@ class OrderController extends Controller
 
     public function create()
     {
-        return Inertia::render('Orders/Create');
+        $products = Product::all();
+        return Inertia::render('Orders/Create', [
+            'products' => $products
+        ]);
     }
 
     public function store(Request $request)
@@ -27,19 +33,42 @@ class OrderController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'price' => 'required|numeric',
+            'products' => 'required|array',
+            'products.*.productId' => 'required|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
         ]);
 
-        $order = Order::create($validatedData);
+        $totalPrice = 0;
+        foreach ($validatedData['products'] as $productData) {
+            $product = Product::find($productData['productId']);
+            $quantity = intval($productData['quantity']);
+            $price = floatval($product->price);
+            $totalPrice += $quantity * $price;
+        }
 
-        $order->categories()->attach($request->input('categories'));
+        $order = new Order();
+        $order->fill([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'user_id' => auth()->user()->id,
+        ]);
+        $order->price = $totalPrice;
+        $order->save();
+
+        $productsData = [];
+        foreach ($validatedData['products'] as $productData) {
+            $productsData[$productData['productId']] = ['quantity' => $productData['quantity']];
+        }
+
+        $order->products()->attach($productsData);
 
         return redirect()->route('orders.index');
     }
 
+
     public function edit(Order $order)
     {
-        $order->load('categories');
+        $order->load(['user', 'categories', 'products']);
 
         return Inertia::render('Orders/Edit', [
             'order' => $order,

@@ -12,22 +12,28 @@ class Order extends Model
     protected $fillable = [
         'name',
         'description',
+        'user_id',
         'price',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
 
-    public function orders()
+    public function products()
     {
-        return $this->belongsToMany(Order::class)->withPivot('quantity');
+        return $this->belongsToMany(Product::class)->withPivot('quantity');
     }
 
     public function getPriceAttribute($value)
     {
-        return '$' . number_format($value / 100, 2);
+        return $value / 100;
     }
 
     public function setPriceAttribute($value)

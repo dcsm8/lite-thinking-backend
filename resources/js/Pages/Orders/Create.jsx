@@ -1,6 +1,4 @@
-import React from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 import {
     FormControl,
     FormLabel,
@@ -9,23 +7,50 @@ import {
     Textarea,
     NumberInput,
     NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
     Container,
     Box,
     Heading,
     Flex,
+    Stack,
+    Select,
 } from "@chakra-ui/react";
+import { Inertia } from "@inertiajs/inertia";
+import { useForm } from "react-hook-form";
 import { InertiaLink } from "@inertiajs/inertia-react";
 import Layout from "../../components/Layout";
 
-const Create = ({ auth }) => {
+const Create = ({ auth, products }) => {
     const { register, handleSubmit, formState } = useForm();
+    const [selectedProducts, setSelectedProducts] = useState([]);
 
     const onSubmit = (data) => {
-        Inertia.post("/orders", data);
+        Inertia.post("/orders", { ...data, products: selectedProducts });
     };
+
+    const handleAddProduct = () => {
+        setSelectedProducts([
+            ...selectedProducts,
+            { productId: "", quantity: 1 },
+        ]);
+    };
+
+    const handleProductChange = (event, index) => {
+        const newProducts = [...selectedProducts];
+        newProducts[index].productId = event.target.value;
+        setSelectedProducts(newProducts);
+    };
+
+    const handleQuantityChange = (value, index) => {
+        const newProducts = [...selectedProducts];
+        newProducts[index].quantity = value;
+        setSelectedProducts(newProducts);
+    };
+
+    const productOptions = products.map((product) => (
+        <option key={product.id} value={product.id}>
+            {product.name}
+        </option>
+    ));
 
     return (
         <Layout auth={auth}>
@@ -50,23 +75,37 @@ const Create = ({ auth }) => {
                                 placeholder="Enter order description"
                             />
                         </FormControl>
-                        <FormControl id="price" mb={5}>
-                            <FormLabel>Price</FormLabel>
-                            <NumberInput>
-                                <NumberInputField
-                                    {...register("price", {
-                                        required: true,
-                                        min: 0,
-                                    })}
-                                    placeholder="Enter order price"
-                                />
-                                <NumberInputStepper>
-                                    <NumberIncrementStepper />
-                                    <NumberDecrementStepper />
-                                </NumberInputStepper>
-                            </NumberInput>
-                        </FormControl>
-                        <Flex justifyContent="flex-end">
+                        {selectedProducts.map((product, index) => (
+                            <Stack
+                                key={index}
+                                direction="row"
+                                spacing={4}
+                                align="center"
+                            >
+                                <Select
+                                    placeholder="Select product"
+                                    value={product.productId}
+                                    onChange={(event) =>
+                                        handleProductChange(event, index)
+                                    }
+                                >
+                                    {productOptions}
+                                </Select>
+                                <NumberInput
+                                    min={1}
+                                    value={product.quantity}
+                                    onChange={(value) =>
+                                        handleQuantityChange(value, index)
+                                    }
+                                >
+                                    <NumberInputField />
+                                </NumberInput>
+                            </Stack>
+                        ))}
+                        <Button onClick={handleAddProduct} mt={3}>
+                            Add Product
+                        </Button>
+                        <Flex justifyContent="flex-end" mt={5}>
                             <InertiaLink href="/orders">
                                 <Button colorScheme="red" mr={3}>
                                     Cancel

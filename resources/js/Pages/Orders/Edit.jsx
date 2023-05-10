@@ -1,41 +1,28 @@
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 import {
     Box,
-    Button,
     Container,
-    FormControl,
-    FormLabel,
     Heading,
-    Input,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
-    NumberInput,
-    NumberInputField,
+    Text,
     Flex,
+    Table,
+    Thead,
+    Tr,
+    Th,
+    Tbody,
+    Td,
 } from "@chakra-ui/react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink } from "@inertiajs/inertia-react";
 import Layout from "../../components/Layout";
 
-const Edit = ({ order, auth }) => {
-    const { register, handleSubmit, setValue } = useForm({
-        defaultValues: {
-            name: order.name,
-            description: order.description,
-            price: order.price,
-        },
-    });
-
-    const onSubmit = (data) => {
-        Inertia.put(`/orders/${order.id}`, data);
-    };
+const Edit = ({ auth, order }) => {
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
-        setValue("name", order.name);
-        setValue("description", order.description);
-        setValue("price", order.price);
+        let total = 0;
+        order.products.forEach((product) => {
+            total += product.price * product.pivot.quantity;
+        });
+        setTotalPrice(total.toFixed(2));
     }, [order]);
 
     return (
@@ -43,54 +30,39 @@ const Edit = ({ order, auth }) => {
             <Container maxW="container.lg">
                 <Box maxW="xl" mx="auto" mt={5}>
                     <Heading as="h1" size="xl" mb={5}>
-                        Edit Order {order.id}
+                        View Order {order.id}
                     </Heading>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <FormControl mb={5}>
-                            <FormLabel htmlFor="name">Name</FormLabel>
-                            <Input
-                                id="name"
-                                placeholder="Enter order name"
-                                {...register("name", { required: true })}
-                            />
-                        </FormControl>
-                        <FormControl mb={5}>
-                            <FormLabel htmlFor="description">
-                                Description
-                            </FormLabel>
-                            <Input
-                                id="description"
-                                placeholder="Enter order description"
-                                {...register("description")}
-                            />
-                        </FormControl>
-                        <FormControl id="price" mb={5}>
-                            <FormLabel>Price</FormLabel>
-                            <NumberInput>
-                                <NumberInputField
-                                    {...register("price", {
-                                        required: true,
-                                        min: 0,
-                                    })}
-                                    placeholder="Enter order price"
-                                />
-                                <NumberInputStepper>
-                                    <NumberIncrementStepper />
-                                    <NumberDecrementStepper />
-                                </NumberInputStepper>
-                            </NumberInput>
-                        </FormControl>
-                        <Flex justifyContent="flex-end">
-                            <InertiaLink href="/orders">
-                                <Button colorScheme="red" mr={3}>
-                                    Cancel
-                                </Button>
-                            </InertiaLink>
-                            <Button type="submit" colorScheme="blue">
-                                Update
-                            </Button>
-                        </Flex>
-                    </form>
+                    <Text mb={5}>Order name: {order.name}</Text>
+                    <Text mb={5}>Order description: {order.description}</Text>
+                    <Text mb={5}>Client: {order.user.name}</Text>
+                    <Text mb={5}>Phone: {order.user.phone}</Text>
+
+                    <Heading as="h2" size="lg" mb={5}>
+                        Products
+                    </Heading>
+
+                    <Table variant="simple">
+                        <Thead>
+                            <Tr>
+                                <Th>Product Name</Th>
+                                <Th>Quantity</Th>
+                                <Th isNumeric>Price</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {order.products.map((product, index) => (
+                                <Tr key={index}>
+                                    <Td>{product.name}</Td>
+                                    <Td>{product.pivot.quantity}</Td>
+                                    <Td isNumeric>{product.price}</Td>
+                                </Tr>
+                            ))}
+                        </Tbody>
+                    </Table>
+
+                    <Flex justifyContent="flex-end" mt={5}>
+                        <Text fontSize="xl">Total price: {totalPrice}</Text>
+                    </Flex>
                 </Box>
             </Container>
         </Layout>
