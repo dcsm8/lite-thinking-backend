@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -19,7 +20,11 @@ class ProductController extends Controller
 
     public function create()
     {
-        return Inertia::render('Products/Create');
+        $categories = Category::all();
+
+        return Inertia::render('Products/Create', [
+            'categories' => $categories,
+        ]);
     }
 
     public function store(Request $request)
@@ -28,11 +33,15 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric',
+            'categories' => 'array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         $product = Product::create($validatedData);
 
-        $product->categories()->attach($request->input('categories'));
+        if (isset($validatedData['categories'])) {
+            $product->categories()->attach($validatedData['categories']);
+        }
 
         return redirect()->route('products.index');
     }
@@ -40,11 +49,14 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $product->load('categories');
+        $categories = Category::all();
 
         return Inertia::render('Products/Edit', [
             'product' => $product,
+            'categories' => $categories,
         ]);
     }
+
 
     public function update(Request $request, Product $product)
     {
@@ -52,11 +64,17 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric',
+            'categories' => 'array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         $product->update($validatedData);
 
-        $product->categories()->sync($request->input('categories'));
+        if (isset($validatedData['categories'])) {
+            $product->categories()->sync($validatedData['categories']);
+        } else {
+            $product->categories()->detach();
+        }
 
         return redirect()->route('products.index');
     }
