@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 use Inertia\Inertia;
 
 /*
@@ -34,4 +34,5 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('orders', OrderController::class);
+    Route::resource('users', UserController::class);
 });

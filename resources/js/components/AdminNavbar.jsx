@@ -32,6 +32,10 @@ const routes = [
         name: "Orders",
         url: "/orders",
     },
+    {
+        name: "Users",
+        url: "/users",
+    },
 ];
 
 const AdminNavbar = ({ auth }) => {
