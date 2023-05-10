@@ -17,8 +17,9 @@ import {
 } from "@chakra-ui/react";
 import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import Layout from "../../components/Layout";
 
-const Edit = ({ order }) => {
+const Edit = ({ order, auth }) => {
     const { register, handleSubmit, setValue } = useForm({
         defaultValues: {
             name: order.name,
@@ -38,57 +39,61 @@ const Edit = ({ order }) => {
     }, [order]);
 
     return (
-        <Container maxW="container.lg">
-            <Box maxW="xl" mx="auto" mt={5}>
-                <Heading as="h1" size="xl" mb={5}>
-                    Edit Order {order.id}
-                </Heading>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <FormControl mb={5}>
-                        <FormLabel htmlFor="name">Name</FormLabel>
-                        <Input
-                            id="name"
-                            placeholder="Enter order name"
-                            {...register("name", { required: true })}
-                        />
-                    </FormControl>
-                    <FormControl mb={5}>
-                        <FormLabel htmlFor="description">Description</FormLabel>
-                        <Input
-                            id="description"
-                            placeholder="Enter order description"
-                            {...register("description")}
-                        />
-                    </FormControl>
-                    <FormControl id="price" mb={5}>
-                        <FormLabel>Price</FormLabel>
-                        <NumberInput>
-                            <NumberInputField
-                                {...register("price", {
-                                    required: true,
-                                    min: 0,
-                                })}
-                                placeholder="Enter order price"
+        <Layout auth={auth}>
+            <Container maxW="container.lg">
+                <Box maxW="xl" mx="auto" mt={5}>
+                    <Heading as="h1" size="xl" mb={5}>
+                        Edit Order {order.id}
+                    </Heading>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <FormControl mb={5}>
+                            <FormLabel htmlFor="name">Name</FormLabel>
+                            <Input
+                                id="name"
+                                placeholder="Enter order name"
+                                {...register("name", { required: true })}
                             />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
-                    </FormControl>
-                    <Flex justifyContent="flex-end">
-                        <InertiaLink href="/orders">
-                            <Button colorScheme="red" mr={3}>
-                                Cancel
+                        </FormControl>
+                        <FormControl mb={5}>
+                            <FormLabel htmlFor="description">
+                                Description
+                            </FormLabel>
+                            <Input
+                                id="description"
+                                placeholder="Enter order description"
+                                {...register("description")}
+                            />
+                        </FormControl>
+                        <FormControl id="price" mb={5}>
+                            <FormLabel>Price</FormLabel>
+                            <NumberInput>
+                                <NumberInputField
+                                    {...register("price", {
+                                        required: true,
+                                        min: 0,
+                                    })}
+                                    placeholder="Enter order price"
+                                />
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                            </NumberInput>
+                        </FormControl>
+                        <Flex justifyContent="flex-end">
+                            <InertiaLink href="/orders">
+                                <Button colorScheme="red" mr={3}>
+                                    Cancel
+                                </Button>
+                            </InertiaLink>
+                            <Button type="submit" colorScheme="blue">
+                                Update
                             </Button>
-                        </InertiaLink>
-                        <Button type="submit" colorScheme="blue">
-                            Update
-                        </Button>
-                    </Flex>
-                </form>
-            </Box>
-        </Container>
+                        </Flex>
+                    </form>
+                </Box>
+            </Container>
+        </Layout>
     );
 };
 

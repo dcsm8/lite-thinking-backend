@@ -1,11 +1,12 @@
 import React from "react";
 import { Flex } from "@chakra-ui/react";
-import Navbar from "../components/Navbar";
+import AdminNavbar from "./AdminNavbar";
+import CustomerNavbar from "./CustomerNavbar";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, auth }) => {
     return (
         <>
-            <Navbar />
+            {auth.user.role === "admin" ? <AdminNavbar /> : <CustomerNavbar />}
             <Flex direction="column" minH="100vh" mb={10}>
                 {children}
             </Flex>
