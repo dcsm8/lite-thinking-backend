@@ -2,84 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Order;
-use App\Models\Product;
-use App\Models\Customer;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('categories')->get();
 
-        return response()->json($orders);
+        return Inertia::render('Orders/Index', [
+            'orders' => $orders,
+        ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Orders/Create');
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'products' => 'required|array',
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'price' => 'required|numeric',
         ]);
 
-        $customer = Customer::findOrFail($validatedData['customer_id']);
-        $products = collect($validatedData['products'])->map(function ($product) {
-            $productModel = Product::findOrFail($product['id']);
-            $productModel->quantity = $product['quantity'];
-            return $productModel;
-        });
+        $order = Order::create($validatedData);
 
-        $order = new Order;
-        $order->customer()->associate($customer);
-        $order->save();
+        $order->categories()->attach($request->input('categories'));
 
-        $order->products()->saveMany($products);
-
-        return response()->json(['message' => 'Order created successfully.', 'order' => $order]);
+        return redirect()->route('orders.index');
     }
 
-    public function show($id)
+    public function edit(Order $order)
     {
-        $order = Order::findOrFail($id);
+        $order->load('categories');
 
-        return response()->json($order);
+        return Inertia::render('Orders/Edit', [
+            'order' => $order,
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
         $validatedData = $request->validate([
-            'customer_id' => 'exists:customers,id',
-            'products' => 'array',
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'price' => 'required|numeric',
         ]);
 
-        $order = Order::findOrFail($id);
+        $order->update($validatedData);
 
-        if (isset($validatedData['customer_id'])) {
-            $customer = Customer::findOrFail($validatedData['customer_id']);
-            $order->customer()->associate($customer);
-        }
+        $order->categories()->sync($request->input('categories'));
 
-        if (isset($validatedData['products'])) {
-            $products = collect($validatedData['products'])->map(function ($product) {
-                $productModel = Product::findOrFail($product['id']);
-                $productModel->quantity = $product['quantity'];
-                return $productModel;
-            });
-
-            $order->products()->detach();
-            $order->products()->saveMany($products);
-        }
-
-        $order->save();
-
-        return response()->json(['message' => 'Order updated successfully.', 'order' => $order]);
+        return redirect()->route('orders.index');
     }
 
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        Order::whereId($id)->delete();
+        $order->delete();
 
-        return response()->json(['message' => 'Order deleted successfully.']);
+        return redirect()->route('orders.index');
     }
 }
