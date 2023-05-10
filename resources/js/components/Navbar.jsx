@@ -23,6 +23,10 @@ const routes = [
         name: "Products",
         url: "/products",
     },
+    {
+        name: "Categories",
+        url: "/categories",
+    },
 ];
 
 const Navbar = () => {

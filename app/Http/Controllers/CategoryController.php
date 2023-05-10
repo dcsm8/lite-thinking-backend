@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -11,7 +12,14 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return response()->json($categories);
+        return Inertia::render('Categories/Index', [
+            'categories' => $categories,
+        ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Categories/Create');
     }
 
     public function store(Request $request)
@@ -22,33 +30,33 @@ class CategoryController extends Controller
 
         $category = Category::create($validatedData);
 
-        return response()->json(['message' => 'Category created successfully.', 'category' => $category]);
+        return redirect()->route('categories.index');
     }
 
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::findOrFail($id);
+        $category->load('products');
 
-        return response()->json($category);
+        return Inertia::render('Categories/Show', [
+            'category' => $category,
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:categories,name,' . $id,
+            'name' => 'required|unique:categories,name,' . $category->id,
         ]);
 
-        Category::whereId($id)->update($validatedData);
+        $category->update($validatedData);
 
-        $category = Category::findOrFail($id);
-
-        return response()->json(['message' => 'Category updated successfully.', 'category' => $category]);
+        return redirect()->route('categories.index');
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        Category::whereId($id)->delete();
+        $category->delete();
 
-        return response()->json(['message' => 'Category deleted successfully.']);
+        return redirect()->route('categories.index');
     }
 }
