@@ -17,6 +17,13 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function edit(Category $category)
+    {
+        return Inertia::render('Categories/Edit', [
+            'category' => $category,
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render('Categories/Create');
@@ -26,6 +33,7 @@ class CategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:categories,name',
+            'description' => 'required',
         ]);
 
         $category = Category::create($validatedData);
@@ -46,6 +54,7 @@ class CategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:categories,name,' . $category->id,
+            'description' => 'required',
         ]);
 
         $category->update($validatedData);
