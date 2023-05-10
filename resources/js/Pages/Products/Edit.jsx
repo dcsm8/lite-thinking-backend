@@ -33,9 +33,9 @@ const Edit = ({ product }) => {
 
     return (
         <Container maxW="container.lg">
-            <Box maxW="xl" mx="auto" mt={10} p={5}>
+            <Box maxW="xl" mx="auto" mt={5}>
                 <Heading as="h1" size="xl" mb={5}>
-                    Edit Product
+                    Edit Product {product.id}
                 </Heading>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormControl mb={5}>

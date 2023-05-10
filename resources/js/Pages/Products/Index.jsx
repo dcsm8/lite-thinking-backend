@@ -33,8 +33,8 @@ const Index = ({ products }) => {
 
     return (
         <Container maxW="container.lg">
-            <Box py={8}>
-                <Flex justifyContent="space-between" alignItems="center" m={8}>
+            <Box>
+                <Flex justifyContent="space-between" alignItems="center" m={5}>
                     <Heading as="h1" size="xl">
                         Products
                     </Heading>
