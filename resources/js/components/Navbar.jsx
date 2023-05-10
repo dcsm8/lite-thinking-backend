@@ -34,7 +34,7 @@ const Navbar = () => {
     const isDesktop = useBreakpointValue({ base: false, lg: true });
 
     const MenuItems = routes.map((item) => (
-        <InertiaLink href={item.url} key={item} onClick={onClose}>
+        <InertiaLink href={item.url} key={item.name} onClick={onClose}>
             <Button variant="ghost" w="100%" mt={4}>
                 {item.name}
             </Button>
@@ -50,7 +50,10 @@ const Navbar = () => {
                             <Flex justify="center">
                                 <ButtonGroup variant="link" spacing="8">
                                     {routes.map((item) => (
-                                        <InertiaLink href={item.url} key={item}>
+                                        <InertiaLink
+                                            href={item.url}
+                                            key={item.name}
+                                        >
                                             <Button>{item.name}</Button>
                                         </InertiaLink>
                                     ))}
