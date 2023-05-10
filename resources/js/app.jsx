@@ -15,9 +15,7 @@ createInertiaApp({
         const InertiaAppWithChakra = () => (
             <ChakraProvider>
                 <CSSReset />
-                <Layout>
-                    <App {...props} />
-                </Layout>
+                <App {...props} />
             </ChakraProvider>
         );
 

@@ -13,8 +13,9 @@ import {
     Textarea,
 } from "@chakra-ui/react";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import Layout from "../../components/Layout";
 
-const Create = () => {
+const Create = ({ auth }) => {
     const { register, handleSubmit, formState } = useForm();
 
     const onSubmit = (data) => {
@@ -22,45 +23,47 @@ const Create = () => {
     };
 
     return (
-        <Container maxW="container.lg">
-            <Box maxW="xl" mx="auto" mt={5}>
-                <Heading as="h1" size="xl" mb={5}>
-                    Create Category
-                </Heading>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <FormControl id="name" mb={5}>
-                        <FormLabel>Name</FormLabel>
-                        <Input
-                            {...register("name", { required: true })}
-                            type="text"
-                            placeholder="Enter category name"
-                        />
-                    </FormControl>
-                    <FormControl id="description" mb={5}>
-                        <FormLabel>Description</FormLabel>
-                        <Textarea
-                            {...register("description", { required: true })}
-                            type="text"
-                            placeholder="Enter category description"
-                        />
-                    </FormControl>
-                    <Flex justifyContent="flex-end">
-                        <InertiaLink href="/categories">
-                            <Button colorScheme="red" mr={3}>
-                                Cancel
+        <Layout auth={auth}>
+            <Container maxW="container.lg">
+                <Box maxW="xl" mx="auto" mt={5}>
+                    <Heading as="h1" size="xl" mb={5}>
+                        Create Category
+                    </Heading>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <FormControl id="name" mb={5}>
+                            <FormLabel>Name</FormLabel>
+                            <Input
+                                {...register("name", { required: true })}
+                                type="text"
+                                placeholder="Enter category name"
+                            />
+                        </FormControl>
+                        <FormControl id="description" mb={5}>
+                            <FormLabel>Description</FormLabel>
+                            <Textarea
+                                {...register("description", { required: true })}
+                                type="text"
+                                placeholder="Enter category description"
+                            />
+                        </FormControl>
+                        <Flex justifyContent="flex-end">
+                            <InertiaLink href="/categories">
+                                <Button colorScheme="red" mr={3}>
+                                    Cancel
+                                </Button>
+                            </InertiaLink>
+                            <Button
+                                colorScheme="teal"
+                                isLoading={formState.isSubmitting}
+                                type="submit"
+                            >
+                                Create
                             </Button>
-                        </InertiaLink>
-                        <Button
-                            colorScheme="teal"
-                            isLoading={formState.isSubmitting}
-                            type="submit"
-                        >
-                            Create
-                        </Button>
-                    </Flex>
-                </form>
-            </Box>
-        </Container>
+                        </Flex>
+                    </form>
+                </Box>
+            </Container>
+        </Layout>
     );
 };
 

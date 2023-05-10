@@ -17,23 +17,16 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 
 const routes = [
     {
-        name: "Products",
-        url: "/products",
-    },
-    {
-        name: "Categories",
-        url: "/categories",
-    },
-    {
-        name: "Orders",
-        url: "/orders",
+        name: "Shop",
+        url: "/shop",
     },
 ];
 
-const Navbar = () => {
+const CustomerNavbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const isDesktop = useBreakpointValue({ base: false, lg: true });
 
@@ -45,13 +38,18 @@ const Navbar = () => {
         </InertiaLink>
     ));
 
+    const handleLogout = (event) => {
+        event.preventDefault();
+        Inertia.post("/logout");
+    };
+
     return (
         <Box as="section" pb={{ base: "5" }}>
             <Box as="nav" bg="bg-surface" boxShadow="sm">
                 <Container py={{ base: "4", lg: "5" }}>
                     <HStack spacing="10" justify="center">
                         {isDesktop ? (
-                            <Flex justify="center">
+                            <Flex>
                                 <ButtonGroup variant="link" spacing="8">
                                     {routes.map((item) => (
                                         <InertiaLink
@@ -61,6 +59,13 @@ const Navbar = () => {
                                             <Button>{item.name}</Button>
                                         </InertiaLink>
                                     ))}
+                                    <Button
+                                        variant="link"
+                                        spacing="8"
+                                        onClick={handleLogout}
+                                    >
+                                        Log out
+                                    </Button>
                                 </ButtonGroup>
                             </Flex>
                         ) : (
@@ -85,8 +90,9 @@ const Navbar = () => {
                         <DrawerBody>{MenuItems}</DrawerBody>
 
                         <DrawerFooter justifyContent="space-between">
-                            <Button variant="ghost">Sign in</Button>
-                            <Button variant="primary">Sign up</Button>
+                            <Button variant="ghost" onClick={handleLogout}>
+                                Log out
+                            </Button>
                         </DrawerFooter>
                     </DrawerContent>
                 </DrawerOverlay>
@@ -95,4 +101,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default CustomerNavbar;
