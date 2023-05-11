@@ -1,45 +1,13 @@
-# Getting Started with Laravel 8.1 and Inertia
-
-This is a basic guide to help you get started with Laravel 8.1 and Inertia, a modern monolithic approach to building web apps with Vue.js.
+# Lite Thinking backend
 
 ## Requirements
 
 Before starting, make sure that you have the following requirements:
 
--   PHP 7.3 or later
+-   PHP 8.1
 -   Composer
 -   Node.js and npm
--   A web server such as Apache or Nginx
--   A database management system such as MySQL
-
-## Installation
-
-Follow the steps below to install Laravel 8.1 on your local machine:
-
-1. Install Composer by following the instructions on the official [Composer website](https://getcomposer.org/).
-
-2. Open a terminal or command prompt and run the following command to install Laravel:
-
-```
-composer global require laravel/installer
-```
-
-3. Once the installation is complete, run the following command to create a new Laravel project:
-
-```
-laravel new myproject
-```
-
-This will create a new Laravel project in a directory called `myproject`.
-
-4. Next, run the following command to install the Inertia and Vue.js packages:
-
-```
-composer require inertiajs/inertia-laravel
-npm install @inertiajs/inertia @inertiajs/inertia-vue vue
-```
-
-This will install the necessary packages for building a monolithic web app using Inertia and Vue.js.
+-   MySQL
 
 ## Database Configuration
 
