@@ -19,16 +19,16 @@ import {
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import Layout from "../../components/Layout";
 
-const Index = ({ products, auth }) => {
+const Index = ({ orders, auth }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedOrder, setSelectedOrder] = useState(null);
 
     const handleDelete = () => {
-        Inertia.delete(`/products/${selectedProduct.id}`);
+        Inertia.delete(`/orders/${selectedOrder.id}`);
     };
 
-    const handleClickDelete = (product) => {
-        setSelectedProduct(product);
+    const handleClickDelete = (order) => {
+        setSelectedOrder(order);
         onOpen();
     };
 
@@ -42,11 +42,11 @@ const Index = ({ products, auth }) => {
                         m={5}
                     >
                         <Heading as="h1" size="xl">
-                            Products
+                            Orders
                         </Heading>
-                        <InertiaLink href="/products/create">
+                        <InertiaLink href="/orders/create">
                             <Button colorScheme="green" size="sm">
-                                Create product
+                                Create order
                             </Button>
                         </InertiaLink>
                     </Flex>
@@ -61,16 +61,16 @@ const Index = ({ products, auth }) => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {products.map((product) => (
-                                <Tr key={product.id}>
-                                    <Td>{product.id}</Td>
-                                    <Td>{product.name}</Td>
-                                    <Td>{product.description}</Td>
-                                    <Td>{product.price}</Td>
+                            {orders.map((order) => (
+                                <Tr key={order.id}>
+                                    <Td>{order.id}</Td>
+                                    <Td>{order.name}</Td>
+                                    <Td>{order.description}</Td>
+                                    <Td>{order.price}</Td>
                                     <Td>
                                         <Stack direction="row" spacing={4}>
                                             <InertiaLink
-                                                href={`/products/${product.id}/edit`}
+                                                href={`/orders/${order.id}/edit`}
                                             >
                                                 <Button
                                                     colorScheme="blue"
@@ -83,7 +83,7 @@ const Index = ({ products, auth }) => {
                                                 size="sm"
                                                 colorScheme="red"
                                                 onClick={() =>
-                                                    handleClickDelete(product)
+                                                    handleClickDelete(order)
                                                 }
                                             >
                                                 Delete

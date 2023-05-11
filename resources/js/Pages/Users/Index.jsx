@@ -19,16 +19,16 @@ import {
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import Layout from "../../components/Layout";
 
-const Index = ({ products, auth }) => {
+const Index = ({ users, auth }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedUser, setSelectedUser] = useState(null);
 
     const handleDelete = () => {
-        Inertia.delete(`/products/${selectedProduct.id}`);
+        Inertia.delete(`/users/${selectedUser.id}`);
     };
 
-    const handleClickDelete = (product) => {
-        setSelectedProduct(product);
+    const handleClickDelete = (user) => {
+        setSelectedUser(user);
         onOpen();
     };
 
@@ -42,35 +42,32 @@ const Index = ({ products, auth }) => {
                         m={5}
                     >
                         <Heading as="h1" size="xl">
-                            Products
+                            Users
                         </Heading>
-                        <InertiaLink href="/products/create">
-                            <Button colorScheme="green" size="sm">
-                                Create product
-                            </Button>
-                        </InertiaLink>
                     </Flex>
                     <Table variant="simple">
                         <Thead>
                             <Tr>
                                 <Th>ID</Th>
                                 <Th>Name</Th>
-                                <Th>Description</Th>
-                                <Th>Price</Th>
+                                <Th>Email</Th>
+                                <Th>Phone</Th>
+                                <Th>Role</Th>
                                 <Th>Actions</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {products.map((product) => (
-                                <Tr key={product.id}>
-                                    <Td>{product.id}</Td>
-                                    <Td>{product.name}</Td>
-                                    <Td>{product.description}</Td>
-                                    <Td>{product.price}</Td>
+                            {users.map((user) => (
+                                <Tr key={user.id}>
+                                    <Td>{user.id}</Td>
+                                    <Td>{user.name}</Td>
+                                    <Td>{user.email}</Td>
+                                    <Td>{user.phone}</Td>
+                                    <Td>{user.role}</Td>
                                     <Td>
                                         <Stack direction="row" spacing={4}>
                                             <InertiaLink
-                                                href={`/products/${product.id}/edit`}
+                                                href={`/users/${user.id}/edit`}
                                             >
                                                 <Button
                                                     colorScheme="blue"
@@ -83,7 +80,7 @@ const Index = ({ products, auth }) => {
                                                 size="sm"
                                                 colorScheme="red"
                                                 onClick={() =>
-                                                    handleClickDelete(product)
+                                                    handleClickDelete(user)
                                                 }
                                             >
                                                 Delete

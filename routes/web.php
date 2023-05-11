@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,19 @@ use App\Http\Controllers\OrderController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Home/Index');
 });
 
-Route::resource('products', ProductController::class);
-Route::resource('categories', CategoryController::class);
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('orders', OrderController::class);
+    Route::resource('users', UserController::class);
+});

@@ -2,84 +2,98 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\Customer;
+use Illuminate\Contracts\Support\ValidatedData;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('categories')->get();
 
-        return response()->json($orders);
+        return Inertia::render('Orders/Index', [
+            'orders' => $orders,
+        ]);
+    }
+
+    public function create()
+    {
+        $products = Product::all();
+        return Inertia::render('Orders/Create', [
+            'products' => $products
+        ]);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
+            'name' => 'required|max:255',
+            'description' => 'required',
             'products' => 'required|array',
+            'products.*.productId' => 'required|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
         ]);
 
-        $customer = Customer::findOrFail($validatedData['customer_id']);
-        $products = collect($validatedData['products'])->map(function ($product) {
-            $productModel = Product::findOrFail($product['id']);
-            $productModel->quantity = $product['quantity'];
-            return $productModel;
-        });
+        $totalPrice = 0;
+        foreach ($validatedData['products'] as $productData) {
+            $product = Product::find($productData['productId']);
+            $quantity = intval($productData['quantity']);
+            $price = floatval($product->price);
+            $totalPrice += $quantity * $price;
+        }
 
-        $order = new Order;
-        $order->customer()->associate($customer);
+        $order = new Order();
+        $order->fill([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'user_id' => auth()->user()->id,
+        ]);
+        $order->price = $totalPrice;
         $order->save();
 
-        $order->products()->saveMany($products);
+        $productsData = [];
+        foreach ($validatedData['products'] as $productData) {
+            $productsData[$productData['productId']] = ['quantity' => $productData['quantity']];
+        }
 
-        return response()->json(['message' => 'Order created successfully.', 'order' => $order]);
+        $order->products()->attach($productsData);
+
+        return redirect()->route('orders.index');
     }
 
-    public function show($id)
+
+    public function edit(Order $order)
     {
-        $order = Order::findOrFail($id);
+        $order->load(['user', 'categories', 'products']);
 
-        return response()->json($order);
+        return Inertia::render('Orders/Edit', [
+            'order' => $order,
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
         $validatedData = $request->validate([
-            'customer_id' => 'exists:customers,id',
-            'products' => 'array',
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'price' => 'required|numeric',
         ]);
 
-        $order = Order::findOrFail($id);
+        $order->update($validatedData);
 
-        if (isset($validatedData['customer_id'])) {
-            $customer = Customer::findOrFail($validatedData['customer_id']);
-            $order->customer()->associate($customer);
-        }
+        $order->categories()->sync($request->input('categories'));
 
-        if (isset($validatedData['products'])) {
-            $products = collect($validatedData['products'])->map(function ($product) {
-                $productModel = Product::findOrFail($product['id']);
-                $productModel->quantity = $product['quantity'];
-                return $productModel;
-            });
-
-            $order->products()->detach();
-            $order->products()->saveMany($products);
-        }
-
-        $order->save();
-
-        return response()->json(['message' => 'Order updated successfully.', 'order' => $order]);
+        return redirect()->route('orders.index');
     }
 
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        Order::whereId($id)->delete();
+        $order->delete();
 
-        return response()->json(['message' => 'Order deleted successfully.']);
+        return redirect()->route('orders.index');
     }
 }

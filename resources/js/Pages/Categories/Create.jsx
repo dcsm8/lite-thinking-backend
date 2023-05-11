@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "react-hook-form";
 import {
@@ -6,41 +6,28 @@ import {
     FormLabel,
     Input,
     Button,
-    Textarea,
-    NumberInput,
-    NumberInputField,
     Container,
     Box,
     Heading,
     Flex,
+    Textarea,
 } from "@chakra-ui/react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 import Layout from "../../components/Layout";
-import Select from "react-select";
 
-const Create = ({ auth, categories }) => {
+const Create = ({ auth }) => {
     const { register, handleSubmit, formState } = useForm();
-    const [selectedCategories, setSelectedCategories] = useState([]);
 
     const onSubmit = (data) => {
-        Inertia.post("/products", { ...data, categories: selectedCategories });
+        Inertia.post("/categories", data);
     };
-
-    const handleCategoriesChange = (selectedOptions) => {
-        setSelectedCategories(selectedOptions.map((option) => option.value));
-    };
-
-    const categoryOptions = categories.map((category) => ({
-        value: category.id,
-        label: category.name,
-    }));
 
     return (
         <Layout auth={auth}>
             <Container maxW="container.lg">
                 <Box maxW="xl" mx="auto" mt={5}>
                     <Heading as="h1" size="xl" mb={5}>
-                        Create Product
+                        Create Category
                     </Heading>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <FormControl id="name" mb={5}>
@@ -48,41 +35,19 @@ const Create = ({ auth, categories }) => {
                             <Input
                                 {...register("name", { required: true })}
                                 type="text"
-                                placeholder="Enter product name"
+                                placeholder="Enter category name"
                             />
                         </FormControl>
                         <FormControl id="description" mb={5}>
                             <FormLabel>Description</FormLabel>
                             <Textarea
                                 {...register("description", { required: true })}
-                                placeholder="Enter product description"
-                            />
-                        </FormControl>
-                        <FormControl id="price" mb={5}>
-                            <FormLabel>Price</FormLabel>
-                            <NumberInput
-                                min={0}
-                                precision={2}
-                                format={(value) => `${value}`}
-                            >
-                                <NumberInputField
-                                    {...register("price", {
-                                        required: true,
-                                        min: 0,
-                                    })}
-                                />
-                            </NumberInput>
-                        </FormControl>
-                        <FormControl id="categories" mb={5}>
-                            <FormLabel>Categories</FormLabel>
-                            <Select
-                                options={categoryOptions}
-                                isMulti
-                                onChange={handleCategoriesChange}
+                                type="text"
+                                placeholder="Enter category description"
                             />
                         </FormControl>
                         <Flex justifyContent="flex-end">
-                            <InertiaLink href="/products">
+                            <InertiaLink href="/categories">
                                 <Button colorScheme="red" mr={3}>
                                     Cancel
                                 </Button>

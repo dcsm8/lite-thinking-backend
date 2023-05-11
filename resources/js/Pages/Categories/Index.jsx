@@ -19,16 +19,16 @@ import {
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 import Layout from "../../components/Layout";
 
-const Index = ({ products, auth }) => {
+const Index = ({ categories, auth }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     const handleDelete = () => {
-        Inertia.delete(`/products/${selectedProduct.id}`);
+        Inertia.delete(`/categories/${selectedCategory.id}`);
     };
 
-    const handleClickDelete = (product) => {
-        setSelectedProduct(product);
+    const handleClickDelete = (category) => {
+        setSelectedCategory(category);
         onOpen();
     };
 
@@ -42,11 +42,11 @@ const Index = ({ products, auth }) => {
                         m={5}
                     >
                         <Heading as="h1" size="xl">
-                            Products
+                            Categories
                         </Heading>
-                        <InertiaLink href="/products/create">
+                        <InertiaLink href="/categories/create">
                             <Button colorScheme="green" size="sm">
-                                Create product
+                                Create category
                             </Button>
                         </InertiaLink>
                     </Flex>
@@ -56,21 +56,19 @@ const Index = ({ products, auth }) => {
                                 <Th>ID</Th>
                                 <Th>Name</Th>
                                 <Th>Description</Th>
-                                <Th>Price</Th>
                                 <Th>Actions</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {products.map((product) => (
-                                <Tr key={product.id}>
-                                    <Td>{product.id}</Td>
-                                    <Td>{product.name}</Td>
-                                    <Td>{product.description}</Td>
-                                    <Td>{product.price}</Td>
+                            {categories.map((category) => (
+                                <Tr key={category.id}>
+                                    <Td>{category.id}</Td>
+                                    <Td>{category.name}</Td>
+                                    <Td>{category.description}</Td>
                                     <Td>
                                         <Stack direction="row" spacing={4}>
                                             <InertiaLink
-                                                href={`/products/${product.id}/edit`}
+                                                href={`/categories/${category.id}/edit`}
                                             >
                                                 <Button
                                                     colorScheme="blue"
@@ -83,7 +81,7 @@ const Index = ({ products, auth }) => {
                                                 size="sm"
                                                 colorScheme="red"
                                                 onClick={() =>
-                                                    handleClickDelete(product)
+                                                    handleClickDelete(category)
                                                 }
                                             >
                                                 Delete
