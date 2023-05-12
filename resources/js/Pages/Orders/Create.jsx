@@ -35,15 +35,26 @@ const Create = ({ auth, products }) => {
     };
 
     const handleProductChange = (event, index) => {
-        const newProducts = [...selectedProducts];
-        newProducts[index].productId = event.target.value;
-        setSelectedProducts(newProducts);
+        const { value } = event.target;
+        setSelectedProducts((prevProducts) => {
+            const updatedProducts = [...prevProducts];
+            updatedProducts[index] = {
+                ...updatedProducts[index],
+                productId: value,
+            };
+            return updatedProducts;
+        });
     };
 
     const handleQuantityChange = (value, index) => {
-        const newProducts = [...selectedProducts];
-        newProducts[index].quantity = value;
-        setSelectedProducts(newProducts);
+        setSelectedProducts((prevProducts) => {
+            const updatedProducts = [...prevProducts];
+            updatedProducts[index] = {
+                ...updatedProducts[index],
+                quantity: value,
+            };
+            return updatedProducts;
+        });
     };
 
     const productOptions = products.map((product) => (

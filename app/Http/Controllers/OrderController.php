@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('categories')->get();
+        $orders = Order::all();
 
         return Inertia::render('Orders/Index', [
             'orders' => $orders,
@@ -68,7 +68,7 @@ class OrderController extends Controller
 
     public function edit(Order $order)
     {
-        $order->load(['user', 'categories', 'products']);
+        $order->load(['user', 'products']);
 
         return Inertia::render('Orders/Edit', [
             'order' => $order,
