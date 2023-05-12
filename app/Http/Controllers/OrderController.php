@@ -8,6 +8,9 @@ use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 class OrderController extends Controller
 {
@@ -18,6 +21,19 @@ class OrderController extends Controller
         return Inertia::render('Orders/Index', [
             'orders' => $orders,
         ]);
+    }
+
+    public function generatePdf(Order $order)
+    {
+        $dompdfOptions = new Options();
+        $dompdfOptions->set('isRemoteEnabled', TRUE);
+
+        $dompdf = new Dompdf($dompdfOptions);
+        $dompdf->loadHtml(view('pdf.order', ['order' => $order])->render());
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return $dompdf->stream('order.pdf');
     }
 
     public function create()

@@ -11,6 +11,8 @@ import {
     Th,
     Tbody,
     Td,
+    Stack,
+    Button,
 } from "@chakra-ui/react";
 import Layout from "../../components/Layout";
 
@@ -25,13 +27,21 @@ const Edit = ({ auth, order }) => {
         setTotalPrice(total.toFixed(2));
     }, [order]);
 
+    const handleDownload = () => {
+        window.location.href = `/orders/${order.id}/pdf`;
+    };
+
     return (
         <Layout auth={auth}>
             <Container maxW="container.lg">
                 <Box maxW="xl" mx="auto" mt={5}>
-                    <Heading as="h1" size="xl" mb={5}>
-                        View Order {order.id}
-                    </Heading>
+                    <Stack>
+                        <Heading as="h1" size="xl" mb={5}>
+                            View Order {order.id}
+                        </Heading>
+                        <Button onClick={handleDownload}>Download PDF</Button>
+                    </Stack>
+
                     <Text mb={5}>Order name: {order.name}</Text>
                     <Text mb={5}>Order description: {order.description}</Text>
                     <Text mb={5}>Client: {order.user.name}</Text>
