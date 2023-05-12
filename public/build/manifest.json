@@ -1,85 +1,85 @@
 {
-  "_DeleteConfirmationModal-95092149.js": {
-    "file": "assets/DeleteConfirmationModal-95092149.js",
+  "_DeleteConfirmationModal-66cf9d42.js": {
+    "file": "assets/DeleteConfirmationModal-66cf9d42.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Layout-b671a2dd.js",
-      "_chunk-GYFRIY2Z-ac522973.js",
-      "_chunk-6CSUKJP7-299cf340.js"
+      "_Layout-e82fa00b.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
+      "_chunk-6CSUKJP7-3c4dd631.js"
     ]
   },
-  "_Layout-b671a2dd.js": {
-    "file": "assets/Layout-b671a2dd.js",
+  "_Layout-e82fa00b.js": {
+    "file": "assets/Layout-e82fa00b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_chunk-O5CRURSQ-834e7048.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-MPFPK3CX-98605125.js"
+      "_chunk-O5CRURSQ-ecda2068.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-MPFPK3CX-73715752.js"
     ]
   },
-  "_chunk-6CSUKJP7-299cf340.js": {
-    "file": "assets/chunk-6CSUKJP7-299cf340.js",
+  "_chunk-6CSUKJP7-3c4dd631.js": {
+    "file": "assets/chunk-6CSUKJP7-3c4dd631.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_chunk-GIDWA67N-b4a4bd12.js": {
-    "file": "assets/chunk-GIDWA67N-b4a4bd12.js",
+  "_chunk-GIDWA67N-3db5cf24.js": {
+    "file": "assets/chunk-GIDWA67N-3db5cf24.js",
     "imports": [
       "resources/js/app.jsx",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-GYFRIY2Z-ac522973.js"
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-GYFRIY2Z-a5e71354.js"
     ]
   },
-  "_chunk-GYFRIY2Z-ac522973.js": {
-    "file": "assets/chunk-GYFRIY2Z-ac522973.js",
+  "_chunk-GYFRIY2Z-a5e71354.js": {
+    "file": "assets/chunk-GYFRIY2Z-a5e71354.js",
     "imports": [
       "resources/js/app.jsx",
-      "_chunk-6CSUKJP7-299cf340.js"
+      "_chunk-6CSUKJP7-3c4dd631.js"
     ]
   },
-  "_chunk-MPFPK3CX-98605125.js": {
-    "file": "assets/chunk-MPFPK3CX-98605125.js",
+  "_chunk-MPFPK3CX-73715752.js": {
+    "file": "assets/chunk-MPFPK3CX-73715752.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_chunk-O5CRURSQ-834e7048.js": {
-    "file": "assets/chunk-O5CRURSQ-834e7048.js",
+  "_chunk-O5CRURSQ-ecda2068.js": {
+    "file": "assets/chunk-O5CRURSQ-ecda2068.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_chunk-OEQDSMWZ-398312ec.js": {
-    "file": "assets/chunk-OEQDSMWZ-398312ec.js",
+  "_chunk-OEQDSMWZ-ee9c91cb.js": {
+    "file": "assets/chunk-OEQDSMWZ-ee9c91cb.js",
     "imports": [
-      "_chunk-GYFRIY2Z-ac522973.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
       "resources/js/app.jsx"
     ]
   },
-  "_chunk-SRMZVY4F-49993fd0.js": {
-    "file": "assets/chunk-SRMZVY4F-49993fd0.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "_chunk-Z3IFIKNA-e38a2e63.js": {
-    "file": "assets/chunk-Z3IFIKNA-e38a2e63.js",
+  "_chunk-SRMZVY4F-6a0c4371.js": {
+    "file": "assets/chunk-SRMZVY4F-6a0c4371.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_index.esm-13401ce0.js": {
-    "file": "assets/index.esm-13401ce0.js",
+  "_chunk-Z3IFIKNA-3d59e05f.js": {
+    "file": "assets/chunk-Z3IFIKNA-3d59e05f.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_react-select.esm-c59c2aa7.js": {
-    "file": "assets/react-select.esm-c59c2aa7.js",
+  "_index.esm-e859c0b8.js": {
+    "file": "assets/index.esm-e859c0b8.js",
     "imports": [
-      "_Layout-b671a2dd.js",
+      "resources/js/app.jsx"
+    ]
+  },
+  "_react-select.esm-a2c05b83.js": {
+    "file": "assets/react-select.esm-a2c05b83.js",
+    "imports": [
+      "_Layout-e82fa00b.js",
       "resources/js/app.jsx"
     ]
   },
@@ -89,229 +89,230 @@
     "src": "resources/css/app.css"
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-d8edd63b.js",
+    "file": "assets/Login-a831170d.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_chunk-O5CRURSQ-834e7048.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-GYFRIY2Z-ac522973.js"
+      "_index.esm-e859c0b8.js",
+      "_chunk-O5CRURSQ-ecda2068.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-GYFRIY2Z-a5e71354.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Login.jsx"
   },
   "resources/js/Pages/Auth/Register.jsx": {
-    "file": "assets/Register-593f12d0.js",
+    "file": "assets/Register-99b8cc01.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-GYFRIY2Z-ac522973.js"
+      "_index.esm-e859c0b8.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-GYFRIY2Z-a5e71354.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Register.jsx"
   },
   "resources/js/Pages/Categories/Create.jsx": {
-    "file": "assets/Create-7c18d9dd.js",
+    "file": "assets/Create-249b3aa3.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-OEQDSMWZ-398312ec.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-GYFRIY2Z-ac522973.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-O5CRURSQ-834e7048.js"
+      "_index.esm-e859c0b8.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-OEQDSMWZ-ee9c91cb.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-O5CRURSQ-ecda2068.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Categories/Create.jsx"
   },
   "resources/js/Pages/Categories/Edit.jsx": {
-    "file": "assets/Edit-2d48d2b2.js",
+    "file": "assets/Edit-acced283.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-GYFRIY2Z-ac522973.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-O5CRURSQ-834e7048.js"
+      "_index.esm-e859c0b8.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-O5CRURSQ-ecda2068.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Categories/Edit.jsx"
   },
   "resources/js/Pages/Categories/Index.jsx": {
-    "file": "assets/Index-db549b05.js",
+    "file": "assets/Index-c42337e9.js",
     "imports": [
       "resources/js/app.jsx",
-      "_DeleteConfirmationModal-95092149.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-Z3IFIKNA-e38a2e63.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-O5CRURSQ-834e7048.js",
-      "_chunk-GYFRIY2Z-ac522973.js"
+      "_DeleteConfirmationModal-66cf9d42.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-Z3IFIKNA-3d59e05f.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-O5CRURSQ-ecda2068.js",
+      "_chunk-GYFRIY2Z-a5e71354.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Categories/Index.jsx"
   },
   "resources/js/Pages/Home/Index.jsx": {
-    "file": "assets/Index-09098642.js",
+    "file": "assets/Index-09116aa8.js",
     "imports": [
       "resources/js/app.jsx",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-O5CRURSQ-834e7048.js"
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-O5CRURSQ-ecda2068.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Home/Index.jsx"
   },
   "resources/js/Pages/Orders/Create.jsx": {
-    "file": "assets/Create-5d068325.js",
+    "file": "assets/Create-1cad019a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-GYFRIY2Z-ac522973.js",
-      "_chunk-GIDWA67N-b4a4bd12.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-OEQDSMWZ-398312ec.js",
-      "_chunk-O5CRURSQ-834e7048.js",
-      "_chunk-MPFPK3CX-98605125.js"
+      "_index.esm-e859c0b8.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
+      "_chunk-GIDWA67N-3db5cf24.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-OEQDSMWZ-ee9c91cb.js",
+      "_chunk-O5CRURSQ-ecda2068.js",
+      "_chunk-MPFPK3CX-73715752.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Orders/Create.jsx"
   },
   "resources/js/Pages/Orders/Edit.jsx": {
-    "file": "assets/Edit-e99a412e.js",
+    "file": "assets/Edit-ce8fcd7e.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Layout-b671a2dd.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-Z3IFIKNA-e38a2e63.js",
-      "_chunk-O5CRURSQ-834e7048.js"
+      "_Layout-e82fa00b.js",
+      "_chunk-O5CRURSQ-ecda2068.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-Z3IFIKNA-3d59e05f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Orders/Edit.jsx"
   },
   "resources/js/Pages/Orders/Index.jsx": {
-    "file": "assets/Index-ba2ad3d1.js",
+    "file": "assets/Index-29b61d4e.js",
     "imports": [
       "resources/js/app.jsx",
-      "_DeleteConfirmationModal-95092149.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-Z3IFIKNA-e38a2e63.js",
-      "_chunk-O5CRURSQ-834e7048.js",
-      "_chunk-GYFRIY2Z-ac522973.js"
+      "_DeleteConfirmationModal-66cf9d42.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-Z3IFIKNA-3d59e05f.js",
+      "_chunk-O5CRURSQ-ecda2068.js",
+      "_chunk-GYFRIY2Z-a5e71354.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Orders/Index.jsx"
   },
   "resources/js/Pages/Products/Create.jsx": {
-    "file": "assets/Create-c5780668.js",
+    "file": "assets/Create-1c2b8b32.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_Layout-b671a2dd.js",
-      "_react-select.esm-c59c2aa7.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-GYFRIY2Z-ac522973.js",
-      "_chunk-OEQDSMWZ-398312ec.js",
-      "_chunk-GIDWA67N-b4a4bd12.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-O5CRURSQ-834e7048.js"
+      "_index.esm-e859c0b8.js",
+      "_Layout-e82fa00b.js",
+      "_react-select.esm-a2c05b83.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
+      "_chunk-OEQDSMWZ-ee9c91cb.js",
+      "_chunk-GIDWA67N-3db5cf24.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-O5CRURSQ-ecda2068.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Products/Create.jsx"
   },
   "resources/js/Pages/Products/Edit.jsx": {
-    "file": "assets/Edit-fbd8327a.js",
+    "file": "assets/Edit-8d7956c0.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_Layout-b671a2dd.js",
-      "_react-select.esm-c59c2aa7.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-GYFRIY2Z-ac522973.js",
-      "_chunk-OEQDSMWZ-398312ec.js",
-      "_chunk-GIDWA67N-b4a4bd12.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-O5CRURSQ-834e7048.js"
+      "_index.esm-e859c0b8.js",
+      "_Layout-e82fa00b.js",
+      "_react-select.esm-a2c05b83.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
+      "_chunk-OEQDSMWZ-ee9c91cb.js",
+      "_chunk-GIDWA67N-3db5cf24.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-O5CRURSQ-ecda2068.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Products/Edit.jsx"
   },
   "resources/js/Pages/Products/Index.jsx": {
-    "file": "assets/Index-acb5b545.js",
+    "file": "assets/Index-21e37b09.js",
     "imports": [
       "resources/js/app.jsx",
-      "_DeleteConfirmationModal-95092149.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-Z3IFIKNA-e38a2e63.js",
-      "_chunk-O5CRURSQ-834e7048.js",
-      "_chunk-GYFRIY2Z-ac522973.js"
+      "_DeleteConfirmationModal-66cf9d42.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-Z3IFIKNA-3d59e05f.js",
+      "_chunk-O5CRURSQ-ecda2068.js",
+      "_chunk-GYFRIY2Z-a5e71354.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Products/Index.jsx"
   },
   "resources/js/Pages/Users/Create.jsx": {
-    "file": "assets/Create-ff7664ff.js",
+    "file": "assets/Create-c44264c3.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-GYFRIY2Z-ac522973.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-O5CRURSQ-834e7048.js"
+      "_index.esm-e859c0b8.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-O5CRURSQ-ecda2068.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Users/Create.jsx"
   },
   "resources/js/Pages/Users/Edit.jsx": {
-    "file": "assets/Edit-abe699cf.js",
+    "file": "assets/Edit-a2329b1a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index.esm-13401ce0.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-GYFRIY2Z-ac522973.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-O5CRURSQ-834e7048.js"
+      "_index.esm-e859c0b8.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-GYFRIY2Z-a5e71354.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-O5CRURSQ-ecda2068.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Users/Edit.jsx"
   },
   "resources/js/Pages/Users/Index.jsx": {
-    "file": "assets/Index-f102cda8.js",
+    "file": "assets/Index-fdf225c5.js",
     "imports": [
       "resources/js/app.jsx",
-      "_DeleteConfirmationModal-95092149.js",
-      "_Layout-b671a2dd.js",
-      "_chunk-SRMZVY4F-49993fd0.js",
-      "_chunk-6CSUKJP7-299cf340.js",
-      "_chunk-MPFPK3CX-98605125.js",
-      "_chunk-Z3IFIKNA-e38a2e63.js",
-      "_chunk-O5CRURSQ-834e7048.js",
-      "_chunk-GYFRIY2Z-ac522973.js"
+      "_DeleteConfirmationModal-66cf9d42.js",
+      "_Layout-e82fa00b.js",
+      "_chunk-SRMZVY4F-6a0c4371.js",
+      "_chunk-6CSUKJP7-3c4dd631.js",
+      "_chunk-MPFPK3CX-73715752.js",
+      "_chunk-Z3IFIKNA-3d59e05f.js",
+      "_chunk-O5CRURSQ-ecda2068.js",
+      "_chunk-GYFRIY2Z-a5e71354.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Users/Index.jsx"
@@ -334,7 +335,7 @@
       "resources/js/Pages/Users/Edit.jsx",
       "resources/js/Pages/Users/Index.jsx"
     ],
-    "file": "assets/app-47b2fb40.js",
+    "file": "assets/app-4834d360.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }
