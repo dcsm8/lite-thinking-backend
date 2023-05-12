@@ -26,11 +26,11 @@ DB_USERNAME=your_database_username
 DB_PASSWORD=your_database_password
 ```
 
-3. Save the changes to the `.env` file.
+3. Save the changes to the `.env` file
 
 ## Compiling Assets
 
-Since we're using Inertia and Vue.js, we need to compile the assets using the following commands:
+Since we're using Inertia and React.js, we need to compile the assets using the following commands:
 
 1. Run the following command to install the required npm packages:
 
@@ -49,9 +49,39 @@ npm run dev
 To start the Laravel application, navigate to the root directory of your project in the terminal and run the following command:
 
 ```
+composer install
+```
+
+```
 php artisan serve
 ```
 
 This will start a development server at `http://localhost:8000`.
 
 You can now visit the application in your web browser by navigating to `http://localhost:8000`.
+
+# Admin Dashboard
+
+Go to http://localhost:8000/login
+
+## Screenshots
+
+![Home](./docs/1.png)
+
+![Login](./docs/2.png)
+
+![Login](./docs/3.png)
+
+![Login](./docs/4.png)
+
+![Login](./docs/5.png)
+
+![Login](./docs/6.png)
+
+![Login](./docs/7.png)
+
+![Login](./docs/8.png)
+
+![Login](./docs/9.png)
+
+![Login](./docs/10.png)
