@@ -1,5 +1,9 @@
 # Lite Thinking backend
 
+## EER Diagram
+
+![er](./docs/er.png)
+
 ## Requirements
 
 Before starting, make sure that you have the following requirements:
@@ -66,22 +70,22 @@ Go to http://localhost:8000/login
 
 ## Screenshots
 
-![Home](./docs/1.png)
+![1](./docs/1.png)
 
-![Login](./docs/2.png)
+![2](./docs/2.png)
 
-![Login](./docs/3.png)
+![3](./docs/3.png)
 
-![Login](./docs/4.png)
+![4](./docs/4.png)
 
-![Login](./docs/5.png)
+![5](./docs/5.png)
 
-![Login](./docs/6.png)
+![6](./docs/6.png)
 
-![Login](./docs/7.png)
+![7](./docs/7.png)
 
-![Login](./docs/8.png)
+![8](./docs/8.png)
 
-![Login](./docs/9.png)
+![9](./docs/9.png)
 
-![Login](./docs/10.png)
+![10](./docs/10.png)
