@@ -17,12 +17,27 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function show(Company $company)
+    public function showInventory(Company $company)
     {
-        return Inertia::render('Companies/View', [
+        $inventory = $company->load('inventory.product');
+
+        return Inertia::render('Companies/Inventory', [
             'company' => $company,
+            'inventory' => $inventory->inventory->map(function ($inventoryItem) {
+                return array_merge($inventoryItem->toArray(), ['product_name' => $inventoryItem->product->name]);
+            })
         ]);
     }
+
+
+
+    public function show(Company $company)
+    {
+        return Inertia::render('Companies/Inventory', [
+            'company' => $company->load('inventory'),
+        ]);
+    }
+
 
     public function create()
     {

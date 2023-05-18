@@ -47,6 +47,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('inventories', InventoryController::class);
     Route::resource('companies', CompanyController::class);
+    Route::get('/companies/{company}/inventory', [CompanyController::class, 'showInventory'])
+        ->name('companies.inventory');
     Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
     Route::get('/orders/{order}/pdf', [OrderController::class, 'generatePdf'])->name('orders.pdf');
 });

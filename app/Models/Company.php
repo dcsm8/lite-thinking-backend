@@ -17,4 +17,9 @@ class Company extends Model
         'address',
         'phone',
     ];
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'company_NIT', 'NIT');
+    }
 }

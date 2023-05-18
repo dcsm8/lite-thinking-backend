@@ -32,8 +32,6 @@ const Index = ({ companies, auth }) => {
         onOpen();
     };
 
-    const isAdmin = auth.user?.role === "admin";
-
     return (
         <Layout auth={auth}>
             <Container maxW="container.lg">
@@ -46,13 +44,11 @@ const Index = ({ companies, auth }) => {
                         <Heading as="h1" size="xl">
                             Companies
                         </Heading>
-                        {isAdmin && (
-                            <InertiaLink href="/companies/create">
-                                <Button colorScheme="green" size="sm">
-                                    Create company
-                                </Button>
-                            </InertiaLink>
-                        )}
+                        <InertiaLink href="/companies/create">
+                            <Button colorScheme="green" size="sm">
+                                Create company
+                            </Button>
+                        </InertiaLink>
                     </Flex>
                     <Table variant="striped">
                         <Thead>
@@ -61,7 +57,7 @@ const Index = ({ companies, auth }) => {
                                 <Th>Name</Th>
                                 <Th>Address</Th>
                                 <Th>Phone</Th>
-                                {isAdmin && <Th>Actions</Th>}
+                                <Th>Actions</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -73,31 +69,35 @@ const Index = ({ companies, auth }) => {
                                     <Td>{company.phone}</Td>
                                     <Td>
                                         <Stack direction="row" spacing={4}>
-                                            {isAdmin && (
-                                                <InertiaLink
-                                                    href={`/companies/${company.NIT}/edit`}
-                                                >
-                                                    <Button
-                                                        colorScheme="blue"
-                                                        size="sm"
-                                                    >
-                                                        Edit
-                                                    </Button>
-                                                </InertiaLink>
-                                            )}
-                                            {isAdmin && (
+                                            <InertiaLink
+                                                href={`/companies/${company.NIT}/inventory`}
+                                            >
                                                 <Button
+                                                    colorScheme="teal"
                                                     size="sm"
-                                                    colorScheme="red"
-                                                    onClick={() =>
-                                                        handleClickDelete(
-                                                            company
-                                                        )
-                                                    }
                                                 >
-                                                    Delete
+                                                    View Inventory
                                                 </Button>
-                                            )}
+                                            </InertiaLink>
+                                            <InertiaLink
+                                                href={`/companies/${company.NIT}/edit`}
+                                            >
+                                                <Button
+                                                    colorScheme="blue"
+                                                    size="sm"
+                                                >
+                                                    Edit
+                                                </Button>
+                                            </InertiaLink>
+                                            <Button
+                                                size="sm"
+                                                colorScheme="red"
+                                                onClick={() =>
+                                                    handleClickDelete(company)
+                                                }
+                                            >
+                                                Delete
+                                            </Button>
                                         </Stack>
                                     </Td>
                                 </Tr>
