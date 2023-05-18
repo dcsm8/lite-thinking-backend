@@ -25,6 +25,7 @@ Route::get('/', function () {
     return Inertia::render('Home/Index');
 });
 
+// Authentication routes
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
@@ -32,6 +33,7 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 
+// Admin-specific routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class);
@@ -41,4 +43,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('inventories', InventoryController::class);
     Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
     Route::get('/orders/{order}/pdf', [OrderController::class, 'generatePdf'])->name('orders.pdf');
+});
+
+// Client-specific routes
+Route::middleware(['auth', 'role:client'])->group(function () {
+    Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 });

@@ -14,6 +14,8 @@ import {
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
+    Tag,
+    TagLabel,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { InertiaLink } from "@inertiajs/inertia-react";
@@ -21,8 +23,8 @@ import { Inertia } from "@inertiajs/inertia";
 
 const routes = [
     {
-        name: "Shop",
-        url: "/shop",
+        name: "Companies",
+        url: "/companies",
     },
 ];
 
@@ -51,6 +53,15 @@ const CustomerNavbar = () => {
                         {isDesktop ? (
                             <Flex>
                                 <ButtonGroup variant="link" spacing="8">
+                                    <Tag
+                                        size="md"
+                                        key="md"
+                                        borderRadius="full"
+                                        variant="solid"
+                                        colorScheme="blue"
+                                    >
+                                        <TagLabel>External</TagLabel>
+                                    </Tag>
                                     {routes.map((item) => (
                                         <InertiaLink
                                             href={item.url}
