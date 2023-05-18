@@ -10,13 +10,8 @@ class CategoriesTableSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            Category::create([
-                'name' => $faker->unique()->words(3, true),
-                'description' => $faker->sentence,
-            ]);
-        }
+        Category::factory()
+            ->count(20)
+            ->create();
     }
 }
