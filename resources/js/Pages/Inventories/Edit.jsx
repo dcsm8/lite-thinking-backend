@@ -9,8 +9,11 @@ import {
     Input,
     Heading,
     Flex,
+    Text,
+    HStack,
 } from "@chakra-ui/react";
 import { Inertia } from "@inertiajs/inertia";
+import { InertiaLink } from "@inertiajs/inertia-react";
 import Layout from "../../components/Layout";
 
 const Edit = ({ inventory, auth }) => {
@@ -34,24 +37,14 @@ const Edit = ({ inventory, auth }) => {
                         Edit Inventory {inventory.id}
                     </Heading>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <FormControl mb={5}>
-                            <FormLabel htmlFor="company_NIT">
-                                Company NIT
-                            </FormLabel>
-                            <Input
-                                id="company_NIT"
-                                {...register("company_NIT", { required: true })}
-                            />
-                        </FormControl>
-                        <FormControl mb={5}>
-                            <FormLabel htmlFor="product_id">
-                                Product ID
-                            </FormLabel>
-                            <Input
-                                id="product_id"
-                                {...register("product_id", { required: true })}
-                            />
-                        </FormControl>
+                        <HStack spacing={2}>
+                            <Text fontWeight="bold">Company NIT</Text>
+                            <Text>{inventory.company_NIT}</Text>
+                        </HStack>
+                        <HStack spacing={2}>
+                            <Text fontWeight="bold">Product name</Text>
+                            <Text>{inventory.product.name}</Text>
+                        </HStack>
                         <FormControl mb={5}>
                             <FormLabel htmlFor="quantity">Quantity</FormLabel>
                             <Input
@@ -60,9 +53,11 @@ const Edit = ({ inventory, auth }) => {
                             />
                         </FormControl>
                         <Flex justifyContent="flex-end">
-                            <Button colorScheme="red" mr={3}>
-                                Cancel
-                            </Button>
+                            <InertiaLink href="/companies">
+                                <Button colorScheme="red" mr={3}>
+                                    Cancel
+                                </Button>
+                            </InertiaLink>
                             <Button type="submit" colorScheme="blue">
                                 Update
                             </Button>

@@ -42,6 +42,8 @@ class InventoryController extends Controller
 
     public function edit(Inventory $inventory)
     {
+        $inventory->load('product');
+
         return Inertia::render('Inventories/Edit', [
             'inventory' => $inventory,
         ]);
