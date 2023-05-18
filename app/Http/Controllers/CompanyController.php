@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class CompanyController extends Controller
 {
@@ -15,6 +17,19 @@ class CompanyController extends Controller
         return Inertia::render('Companies/Index', [
             'companies' => $companies,
         ]);
+    }
+
+    public function generatePdf(Company $company)
+    {
+        $dompdfOptions = new Options();
+        $dompdfOptions->set('isRemoteEnabled', TRUE);
+
+        $dompdf = new Dompdf($dompdfOptions);
+        $dompdf->loadHtml(view('pdf.inventory', ['company' => $company])->render());
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return $dompdf->stream('inventory.pdf');
     }
 
     public function showInventory(Company $company)
@@ -28,8 +43,6 @@ class CompanyController extends Controller
             })
         ]);
     }
-
-
 
     public function show(Company $company)
     {

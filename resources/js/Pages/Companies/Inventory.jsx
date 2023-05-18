@@ -12,19 +12,29 @@ import {
     Td,
     Th,
     Tbody,
+    Button,
+    Stack,
 } from "@chakra-ui/react";
 import Layout from "../../components/Layout";
 
 const Inventory = ({ company, auth }) => {
-    console.log(company);
+    const handleDownload = () => {
+        window.location.href = `/companies/${company.NIT}/pdf`;
+    };
+
     return (
         <Layout auth={auth}>
             <Container maxW="container.lg">
                 <Box maxW="xl" mx="auto" mt={5}>
-                    <Heading as="h1" size="xl" mb={5}>
-                        Company Inventory
-                    </Heading>
-                    <VStack spacing={4} align="start">
+                    <Stack>
+                        <Heading as="h1" size="xl" mb={5}>
+                            Company Inventory
+                        </Heading>
+                        <Button colorScheme="blue" onClick={handleDownload}>
+                            Download PDF
+                        </Button>
+                    </Stack>
+                    <VStack spacing={4} align="start" mt={4}>
                         <HStack spacing={2}>
                             <Text fontWeight="bold">NIT:</Text>
                             <Text>{company.NIT}</Text>
