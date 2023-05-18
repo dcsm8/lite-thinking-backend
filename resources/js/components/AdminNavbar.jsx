@@ -40,6 +40,10 @@ const routes = [
         name: "Companies",
         url: "/companies",
     },
+    {
+        name: "Inventories",
+        url: "/inventories",
+    },
 ];
 
 const AdminNavbar = ({ auth }) => {
