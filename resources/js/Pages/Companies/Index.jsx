@@ -50,7 +50,7 @@ const Index = ({ companies, auth }) => {
                             </Button>
                         </InertiaLink>
                     </Flex>
-                    <Table variant="simple">
+                    <Table variant="striped">
                         <Thead>
                             <Tr>
                                 <Th>NIT</Th>

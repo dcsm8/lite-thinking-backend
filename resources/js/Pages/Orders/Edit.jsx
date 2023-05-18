@@ -51,7 +51,7 @@ const Edit = ({ auth, order }) => {
                         Products
                     </Heading>
 
-                    <Table variant="simple">
+                    <Table variant="striped">
                         <Thead>
                             <Tr>
                                 <Th>Product Name</Th>

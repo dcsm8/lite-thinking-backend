@@ -45,7 +45,7 @@ const Index = ({ users, auth }) => {
                             Users
                         </Heading>
                     </Flex>
-                    <Table variant="simple">
+                    <Table variant="striped">
                         <Thead>
                             <Tr>
                                 <Th>ID</Th>
