@@ -1,6 +1,6 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
-import { useForm } from "react-hook-form";
+import { useForm } from "@inertiajs/react";
 import {
     Box,
     Button,
@@ -10,15 +10,25 @@ import {
     FormLabel,
     Input,
     Stack,
+    Spinner,
 } from "@chakra-ui/react";
 import { InertiaLink, usePage } from "@inertiajs/inertia-react";
 
 const Login = () => {
     const { errors } = usePage().props;
-    const { register, handleSubmit, formState } = useForm();
 
-    const onSubmit = (data) => {
-        Inertia.post("/login", data);
+    const { data, setData, post, processing } = useForm({
+        email: "",
+        password: "",
+    });
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        post("/login");
+    };
+
+    const handleChange = (e) => {
+        setData(e.target.id, e.target.value);
     };
 
     return (
@@ -30,14 +40,15 @@ const Login = () => {
                 width={{ base: "90%", md: "40%" }}
                 boxShadow="xl"
             >
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={onSubmit}>
                     <Stack spacing={4}>
                         <FormControl isInvalid={errors.email}>
                             <FormLabel htmlFor="email">Email address</FormLabel>
                             <Input
                                 type="email"
                                 id="email"
-                                {...register("email", { required: true })}
+                                value={data.email}
+                                onChange={handleChange}
                             />
                             <FormErrorMessage>{errors.email}</FormErrorMessage>
                         </FormControl>
@@ -47,7 +58,8 @@ const Login = () => {
                             <Input
                                 type="password"
                                 id="password"
-                                {...register("password", { required: true })}
+                                value={data.password}
+                                onChange={handleChange}
                             />
                             <FormErrorMessage>
                                 {errors.password}
@@ -56,8 +68,9 @@ const Login = () => {
 
                         <Button
                             colorScheme="teal"
-                            isLoading={formState.isSubmitting}
                             type="submit"
+                            isLoading={processing}
+                            loadingText="Submitting..."
                         >
                             Login
                         </Button>
