@@ -33,19 +33,18 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 
+// Client-specific routes
+Route::middleware(['auth', 'role:admin,client'])->group(function () {
+    Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
+});
+
 // Admin-specific routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('users', UserController::class);
-    Route::resource('companies', CompanyController::class);
     Route::resource('inventories', InventoryController::class);
     Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
     Route::get('/orders/{order}/pdf', [OrderController::class, 'generatePdf'])->name('orders.pdf');
-});
-
-// Client-specific routes
-Route::middleware(['auth', 'role:client'])->group(function () {
-    Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 });
