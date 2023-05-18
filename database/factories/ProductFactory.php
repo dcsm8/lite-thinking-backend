@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,5 +31,13 @@ class ProductFactory extends Factory
             'description' => $this->faker->paragraph,
             'price' => $this->faker->numberBetween(100, 10000),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Product $product) {
+            $categories = Category::factory(rand(1, 3))->create();
+            $product->categories()->attach($categories);
+        });
     }
 }
