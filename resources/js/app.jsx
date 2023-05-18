@@ -3,7 +3,9 @@ import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/inertia-react";
 import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import Layout from "./components/Layout";
+import { InertiaProgress } from "@inertiajs/progress";
+
+InertiaProgress.init();
 
 createInertiaApp({
     resolve: (name) =>
@@ -21,4 +23,5 @@ createInertiaApp({
 
         createRoot(el).render(<InertiaAppWithChakra />);
     },
+    progress: true,
 });
