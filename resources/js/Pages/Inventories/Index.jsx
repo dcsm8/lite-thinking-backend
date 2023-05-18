@@ -39,7 +39,7 @@ const Index = ({ inventories, auth }) => {
                         <Thead>
                             <Tr>
                                 <Th>Company NIT</Th>
-                                <Th>Product ID</Th>
+                                <Th>Product Name</Th>
                                 <Th>Quantity</Th>
                                 <Th>Actions</Th>
                             </Tr>
@@ -48,7 +48,7 @@ const Index = ({ inventories, auth }) => {
                             {inventories.map((inventory) => (
                                 <Tr key={inventory.id}>
                                     <Td>{inventory.company_NIT}</Td>
-                                    <Td>{inventory.product_id}</Td>
+                                    <Td>{inventory.product.name}</Td>
                                     <Td>{inventory.quantity}</Td>
                                     <Td>
                                         <Stack direction="row" spacing={4}>
