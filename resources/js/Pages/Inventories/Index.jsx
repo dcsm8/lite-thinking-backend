@@ -13,6 +13,7 @@ import {
     Box,
     Stack,
     Flex,
+    Link as ChakraLink,
 } from "@chakra-ui/react";
 import Layout from "../../components/Layout";
 
@@ -47,7 +48,16 @@ const Index = ({ inventories, auth }) => {
                         <Tbody>
                             {inventories.map((inventory) => (
                                 <Tr key={inventory.id}>
-                                    <Td>{inventory.company_NIT}</Td>
+                                    <Td>
+                                        <ChakraLink
+                                            as={InertiaLink}
+                                            href={`/companies/${inventory.company_NIT}`}
+                                            color="blue.500"
+                                        >
+                                            {inventory.company_NIT}
+                                        </ChakraLink>
+                                    </Td>
+
                                     <Td>{inventory.product.name}</Td>
                                     <Td>{inventory.quantity}</Td>
                                     <Td>
