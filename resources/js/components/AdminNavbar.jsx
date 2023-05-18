@@ -14,6 +14,8 @@ import {
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
+    Tag,
+    TagLabel,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { InertiaLink } from "@inertiajs/inertia-react";
@@ -69,8 +71,17 @@ const AdminNavbar = ({ auth }) => {
                 <Container py={{ base: "4", lg: "5" }}>
                     <HStack spacing="10" justify="center">
                         {isDesktop ? (
-                            <Flex>
+                            <Flex alignItems="center">
                                 <ButtonGroup variant="link" spacing="8">
+                                    <Tag
+                                        size="md"
+                                        key="md"
+                                        borderRadius="full"
+                                        variant="solid"
+                                        colorScheme="green"
+                                    >
+                                        <TagLabel>Administrator</TagLabel>
+                                    </Tag>
                                     {routes.map((item) => (
                                         <InertiaLink
                                             href={item.url}
@@ -80,7 +91,7 @@ const AdminNavbar = ({ auth }) => {
                                         </InertiaLink>
                                     ))}
                                     <Button
-                                        variant="link"
+                                        colorScheme="red"
                                         spacing="8"
                                         onClick={handleLogout}
                                     >
