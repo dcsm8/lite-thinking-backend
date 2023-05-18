@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ExternalController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
@@ -35,7 +36,7 @@ Route::post('register', [AuthController::class, 'register']);
 
 // Client-specific routes
 Route::middleware(['auth', 'role:admin,client'])->group(function () {
-    Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
+    Route::get('/external', [ExternalController::class, 'index'])->name('external.index');
 });
 
 // Admin-specific routes
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('orders', OrderController::class);
     Route::resource('users', UserController::class);
     Route::resource('inventories', InventoryController::class);
+    Route::resource('companies', CompanyController::class);
     Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
     Route::get('/orders/{order}/pdf', [OrderController::class, 'generatePdf'])->name('orders.pdf');
 });

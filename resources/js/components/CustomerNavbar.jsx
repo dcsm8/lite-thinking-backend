@@ -24,7 +24,7 @@ import { Inertia } from "@inertiajs/inertia";
 const routes = [
     {
         name: "Companies",
-        url: "/companies",
+        url: "/external",
     },
 ];
 
