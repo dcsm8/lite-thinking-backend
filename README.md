@@ -4,6 +4,10 @@
 
 ![er](./docs/er.png)
 
+## Architecture
+
+![er](./docs/architecture.png)
+
 ## Requirements
 
 Before starting, make sure that you have the following requirements:
