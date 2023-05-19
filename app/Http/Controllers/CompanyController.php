@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InventoryPdfMailable;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -31,6 +34,59 @@ class CompanyController extends Controller
 
         return $dompdf->stream('inventory.pdf');
     }
+
+    public function generatePdfInventory(Company $company)
+    {
+        $dompdfOptions = new Options();
+        $dompdfOptions->set('isRemoteEnabled', TRUE);
+
+        $dompdf = new Dompdf($dompdfOptions);
+        $dompdf->loadHtml(view('pdf.inventory', ['company' => $company])->render());
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $filename = 'inventory_' . $company->NIT . '.pdf';
+
+        $pdfPath = 'pdfs/' . $filename;
+        Storage::put($pdfPath, $dompdf->output());
+
+        return $pdfPath;
+    }
+
+
+
+    public function sendEmail(Request $request, $NIT)
+    {
+        $email = $request->input('email');
+
+        $company = Company::where('NIT', $NIT)->first();
+
+        if (!$company) {
+            return response()->json(['error' => 'Company not found'], 404);
+        }
+
+        $pdfPath = $this->generatePdfInventory($company);
+
+        if (!$pdfPath) {
+            return response()->json(['error' => 'Failed to generate PDF'], 500);
+        }
+
+        try {
+            Mail::to($email)->send(new InventoryPdfMailable($pdfPath));
+        } catch (\Exception $e) {
+            dd($e);
+            return Inertia::render('Companies/Inventory', [
+                'emailError' => 'Failed to send email',
+                'company' => $company
+            ]);
+        }
+
+        return Inertia::render('Companies/Inventory', [
+            'emailSuccess' => 'Email sent successfully',
+            'company' => $company
+        ]);
+    }
+
 
     public function showInventory(Company $company)
     {

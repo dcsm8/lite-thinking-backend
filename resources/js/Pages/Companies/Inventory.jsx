@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "@inertiajs/inertia-react";
 import {
     Box,
     Container,
@@ -14,10 +15,25 @@ import {
     Tbody,
     Button,
     Stack,
+    FormControl,
+    FormLabel,
+    Input,
+    Flex,
 } from "@chakra-ui/react";
 import Layout from "../../components/Layout";
 
-const Inventory = ({ company, auth }) => {
+const Inventory = ({ company, auth, emailError, emailSuccess }) => {
+    const { data, setData, post, processing } = useForm({ email: "" });
+
+    const handleChange = (e) => {
+        setData(e.target.name, e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post(`/companies/${company.NIT}/sendEmail`);
+    };
+
     const handleDownload = () => {
         window.location.href = `/companies/${company.NIT}/pdf`;
     };
@@ -33,6 +49,35 @@ const Inventory = ({ company, auth }) => {
                         <Button colorScheme="blue" onClick={handleDownload}>
                             Download PDF
                         </Button>
+                        <form onSubmit={handleSubmit}>
+                            <FormControl id="email" isRequired>
+                                <FormLabel>Email address</FormLabel>
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    value={data.email}
+                                    onChange={handleChange}
+                                />
+                                {emailError && (
+                                    <Text color="red.500">{emailError}</Text>
+                                )}
+                                {emailSuccess && (
+                                    <Text color="green.500">
+                                        {emailSuccess}
+                                    </Text>
+                                )}
+                            </FormControl>
+                            <Flex justifyContent="end">
+                                <Button
+                                    mt={3}
+                                    colorScheme="purple"
+                                    type="submit"
+                                    isLoading={processing}
+                                >
+                                    Send Email
+                                </Button>
+                            </Flex>
+                        </form>
                     </Stack>
                     <VStack spacing={4} align="start" mt={4}>
                         <HStack spacing={2}>
